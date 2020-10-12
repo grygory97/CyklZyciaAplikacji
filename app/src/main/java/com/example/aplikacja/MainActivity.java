@@ -5,9 +5,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
+
 
     private TextView textView;
     private String text = "";
@@ -16,46 +18,14 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        textView = (TextView) findViewById(R.id.textView);
-        text += "onCreate()\n";
-        updateTextView();
     }
 
-    @Override
-    protected void onPause() {
-        super.onPause();
-        text += "onPause()\n";
-        updateTextView();
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        text += "onStart()\n";
-        updateTextView();
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        text += "onStop()\n";
-        updateTextView();
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        text += "onResume()\n";
-        updateTextView();
-    }
-
-    private void updateTextView() {
-        textView.setText(text);
-    }
 
     public void onStartBtnClick(View view) {
-        Intent intent = new Intent(this, SecondActivity.class);
+        Intent intent = new Intent(this, SecondActivity.class); //inicjalizacja nowej intencji
+        EditText editText = (EditText) findViewById(R.id.editView);
+        String text = String.valueOf(editText.getText());
+        intent.putExtra(SecondActivity.KEY_TEXT, text); //przesłanie naszej danej do 2 activity pierwszy parametr klucz 2 arg dana
         startActivity(intent);
     }
 }
